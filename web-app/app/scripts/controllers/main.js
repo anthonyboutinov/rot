@@ -16,11 +16,11 @@ angular.module('rotApp')
       matchBrackets: true,
       indentWithTabs: true,
       tabMode: 'shift',
-      mode: 'javascript',
+      mode: 'php',
       autofocus: true,
     };
 
-    $scope.code = '<?php echo "Hello World"; ?>';
+    $scope.code = '<?php\necho "Hello World";\n?>';
     $scope.console = {
       output: 'Здесь будут отображаться результаты работы программы',
     };

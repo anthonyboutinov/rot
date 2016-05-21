@@ -8,10 +8,9 @@
  * Controller of the rotApp
  */
 angular.module('rotApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope) {
+    $scope.code = '// Начните писать код здесь...';
+    $scope.console = {
+      output: 'Здесь будут отображаться результаты работы кода',
+    };
   });

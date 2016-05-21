@@ -9,8 +9,21 @@
  */
 angular.module('rotApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.code = '// Начните писать код здесь...';
+
+    $scope.editorOptions = {
+      lineWrapping : true,
+      lineNumbers: true,
+      matchBrackets: true,
+      indentWithTabs: true,
+      tabMode: 'shift',
+      mode: 'javascript',
+      autofocus: true,
+    };
+
+    $scope.code = '<?php echo "Hello World"; ?>';
     $scope.console = {
       output: 'Здесь будут отображаться результаты работы программы',
     };
+
+
   });

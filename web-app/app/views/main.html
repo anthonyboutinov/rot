@@ -9,16 +9,14 @@
         </ul>
       </div>
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-primary pull-right compile">Скомпилировать</button>
+        <button type="submit" class="btn btn-success pull-right compile"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Запустить</button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="container main-body">
-  <div class="panel-body">
-    <div contenteditable="" class="code code-fullscreen" ng-model="code"></div>
-  </div>
+  <ui-codemirror ui-codemirror-opts="editorOptions" ng-model="code"></ui-codemirror>
 </div>
 
 <div class="footer panel-footer fixed fixed-bottom">

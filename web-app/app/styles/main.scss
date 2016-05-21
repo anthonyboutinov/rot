@@ -15,19 +15,20 @@ body {
   word-break: break-all;
   word-wrap: break-word;
 
-  &-fullscreen {
-    min-height: calc(-80px - #{$navbar-height} + 100vh);
-  }
-
   &:focus {
     outline: 0px solid transparent;
   }
+}
+
+.CodeMirror-wrap {
+  min-height: calc(100vh - 190px);
 }
 
 .fixed {
   position: fixed;
   left: 0;
   width: 100%;
+  z-index: 1000;
   background: $gray-lighter;
   &-top {
     top: $navbar-height;

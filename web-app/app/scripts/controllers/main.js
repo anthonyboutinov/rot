@@ -11,6 +11,6 @@ angular.module('rotApp')
   .controller('MainCtrl', function ($scope) {
     $scope.code = '// Начните писать код здесь...';
     $scope.console = {
-      output: 'Здесь будут отображаться результаты работы кода',
+      output: 'Здесь будут отображаться результаты работы программы',
     };
   });

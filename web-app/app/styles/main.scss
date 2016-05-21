@@ -14,7 +14,10 @@ body {
   line-height: 1.428571429;
   word-break: break-all;
   word-wrap: break-word;
-  min-height: calc(-80px - #{$navbar-height} + 100vh);
+
+  &-fullscreen {
+    min-height: calc(-80px - #{$navbar-height} + 100vh);
+  }
 
   &:focus {
     outline: 0px solid transparent;
@@ -43,4 +46,8 @@ body {
 .panel-footer {
   max-height: 30vh;
   overflow: scroll;
+}
+
+.compile {
+  margin-top: 3px;
 }

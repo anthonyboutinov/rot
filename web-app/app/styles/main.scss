@@ -3,8 +3,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.nav-langs {
-  margin-bottom: 20px;
+body {
+  margin-top: $navbar-height;
 }
 
 .code {
@@ -14,7 +14,33 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   line-height: 1.428571429;
   word-break: break-all;
   word-wrap: break-word;
+  min-height: calc(-80px - #{$navbar-height} + 100vh);
+
   &:focus {
     outline: 0px solid transparent;
   }
+}
+
+.fixed {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background: $gray-lighter;
+  &-top {
+    top: $navbar-height;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  &-bottom {
+    bottom: 0;
+  }
+}
+
+.main-body {
+  margin-top: (80px + $navbar-height);
+}
+
+.panel-footer {
+  max-height: 30vh;
+  overflow: scroll;
 }

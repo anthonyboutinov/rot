@@ -1,13 +1,26 @@
-<ul class="nav nav-pills nav-justified nav-langs">
-  <li role="presentation" class="active"><a ng-href="#/">PHP</a></li>
-  <li role="presentation" class="disabled"><a ng-href="#/">Java</a></li>
-  <li role="presentation" class="disabled"><a ng-href="#/">C++</a></li>
-</ul>
+<div class="container fixed fixed-top">
+  <div class="row">
+    <div class="col-sm-8">
+      <ul class="nav nav-pills nav-langs">
+        <li role="presentation" class="active"><a ng-href="#/">PHP</a></li>
+        <li role="presentation" class="disabled"><a ng-href="#/">Java</a></li>
+        <li role="presentation" class="disabled"><a ng-href="#/">C++</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary pull-right">Скомпилировать</button>
+    </div>
+  </div>
+</div>
 
-<div class="panel panel-default">
+<div class="container main-body">
   <div class="panel-body">
     <div contenteditable="" class="code" ng-model="code"></div>
-    <button type="submit" class="btn btn-primary pull-right">Скомпилировать</button>
   </div>
-  <div class="panel-footer code" ng-bind="console.output"></div>
+</div>
+
+<div class="footer panel-footer fixed fixed-bottom">
+  <div class="container">
+    <div class="code" ng-bind="console.output"></div>
+  </div>
 </div>

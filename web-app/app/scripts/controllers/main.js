@@ -8,7 +8,7 @@
  * Controller of the rotApp
  */
 angular.module('rotApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, $soap) {
 
     $scope.editorOptions = {
       lineWrapping : true,
@@ -16,7 +16,6 @@ angular.module('rotApp')
       matchBrackets: true,
       indentWithTabs: true,
       tabMode: 'shift',
-      mode: 'php',
       autofocus: true,
     };
 
@@ -28,7 +27,16 @@ angular.module('rotApp')
       {
         name: "PHP",
         mode: "php",
-        handler: function(input) {},
+        handler: function(input) {
+
+          var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
+          var action = "check";
+
+          $soap.post(url, action).then(function(responce) {
+            console.log(responce);
+          });
+
+        },
         sampleCode: '<?php\necho "Hello World";\n?>',
       },
       {
@@ -36,13 +44,13 @@ angular.module('rotApp')
         mode: "text/x-java",
         handler: function(input) {
 
-          var address = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator";
+          var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
+          var action = "evaluateCode";
+          var params = {"code": $scope.code};
 
-          $http.get(address).
-            success(function(data) {
-              console.log(data);
-              $scope.console.output = data;
-            });
+          $soap.post(url, action, params).then(function(responce) {
+            console.log(responce);
+          });
 
         },
         sampleCode: 'System.out.println("Hello World");',
@@ -55,7 +63,7 @@ angular.module('rotApp')
       },
     ];
 
-    $scope.currentLang = "PHP";
+    $scope.currentLang = "Java";
 
     var setSampleCode = function() {
       for (var i = 0; i < $scope.langs.length; i++) {

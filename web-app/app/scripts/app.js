@@ -11,7 +11,8 @@
 angular
   .module('rotApp', [
     'ngRoute',
-    'ui.codemirror'
+    'ui.codemirror',
+    'angularSoap',
   ])
   .config(function ($routeProvider) {
     $routeProvider

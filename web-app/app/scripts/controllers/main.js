@@ -29,11 +29,11 @@ angular.module('rotApp')
         mode: "php",
         handler: function(input) {
 
-          var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
+          var url = "RESTful URL";
           var action = "check";
 
-          $soap.post(url, action).then(function(responce) {
-            console.log(responce);
+          $http.get(url).then(function(response) {
+            console.log(response);
           });
 
         },
@@ -48,8 +48,8 @@ angular.module('rotApp')
           var action = "evaluateCode";
           var params = {"code": $scope.code};
 
-          $soap.post(url, action, params).then(function(responce) {
-            console.log(responce);
+          $soap.post(url, action, params).then(function(response) {
+            console.log(response);
           });
 
         },

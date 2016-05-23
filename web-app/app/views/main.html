@@ -3,13 +3,11 @@
     <div class="row">
       <div class="col-sm-8">
         <ul class="nav nav-pills nav-langs">
-          <li role="presentation" class="active"><a ng-href="#/">PHP</a></li>
-          <li role="presentation" class="disabled"><a ng-href="#/">Java</a></li>
-          <li role="presentation" class="disabled"><a ng-href="#/">C++</a></li>
+          <li ng-repeat="lang in langs" role="presentation" ng-class="{'active': lang.name === currentLang}"><a href="" ng-click="setLang(lang.name)">{{lang.name}}</a></li>
         </ul>
       </div>
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-success pull-right compile"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Запустить</button>
+        <button type="submit" class="btn btn-success pull-right compile" ng-click="run()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Запустить</button>
       </div>
     </div>
   </div>

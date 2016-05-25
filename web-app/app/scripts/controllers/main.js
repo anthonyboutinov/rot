@@ -27,14 +27,33 @@ angular.module('rotApp')
       {
         name: "PHP",
         mode: "php",
-        handler: function(input) {
+        handler: function(code) {
 
-          var url = "RESTful URL";
-          var action = "check";
-
-          $http.get(url).then(function(response) {
+          var successfulCallback = function(response) {
             console.log(response);
-          });
+          };
+
+          var methods = {
+            get: function(baseUrl, params) {
+
+              var appendixUrl = "?apitest.helloAPIWithParams=" + JSON.stringify(params);
+              var compositeUrl = baseUrl + appendixUrl;
+
+              console.log(compositeUrl);
+              $http.get(compositeUrl).then(successfulCallback);
+
+            },
+            post: function(url, params) {
+              $http.post(url, params).then(successfulCallback);
+            }
+          }
+
+          var params = {code: code};
+          var baseUrl = "http://localhost/";
+
+          var useMethod = "get";
+
+          methods[useMethod](baseUrl, params);
 
         },
         sampleCode: '<?php\necho "Hello World";\n?>',
@@ -42,11 +61,11 @@ angular.module('rotApp')
       {
         name: "Java",
         mode: "text/x-java",
-        handler: function(input) {
+        handler: function(code) {
 
           var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
           var action = "evaluateCode";
-          var params = {"code": $scope.code};
+          var params = {code: code};
 
           $soap.post(url, action, params).then(function(response) {
             console.log(response);
@@ -58,7 +77,7 @@ angular.module('rotApp')
       {
         name: "C++",
         mode: "text/x-c++src",
-        handler: function(input) {},
+        handler: function(code) {},
         sampleCode: '// No sample code set for C++'
       },
     ];

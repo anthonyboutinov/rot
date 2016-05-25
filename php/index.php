@@ -1,10 +1,12 @@
 <?php
 header('Content-type: text/html; charset=UTF-8');
+header("Access-Control-Allow-Origin: *");
+
 if (count($_REQUEST)>0){
     require_once 'apiEngine.php';
     foreach ($_REQUEST as $apiFunctionName => $apiFunctionParams) {
         $APIEngine=new APIEngine($apiFunctionName,$apiFunctionParams);
-        echo $APIEngine->callApiFunction(); 
+        echo $APIEngine->callApiFunction();
         break;
     }
 }else{

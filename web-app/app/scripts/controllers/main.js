@@ -23,37 +23,25 @@ angular.module('rotApp')
       output: 'Здесь будут отображаться результаты работы программы',
     };
 
+    var successfulServerCallback = function(response) {
+      console.log(response);
+    };
+
     $scope.langs = [
       {
         name: "PHP",
         mode: "php",
         handler: function(code) {
 
-          var successfulCallback = function(response) {
-            console.log(response);
-          };
 
-          var methods = {
-            get: function(baseUrl, params) {
-
-              var appendixUrl = "?apitest.helloAPIWithParams=" + JSON.stringify(params);
-              var compositeUrl = baseUrl + appendixUrl;
-
-              console.log(compositeUrl);
-              $http.get(compositeUrl).then(successfulCallback);
-
-            },
-            post: function(url, params) {
-              $http.post(url, params).then(successfulCallback);
-            }
-          }
 
           var params = {code: code};
           var baseUrl = "http://localhost/";
+          var appendixUrl = "?apiRequest.APIWithParams=" + JSON.stringify(params);
+          var compositeUrl = baseUrl + appendixUrl;
 
-          var useMethod = "get";
-
-          methods[useMethod](baseUrl, params);
+          console.log(compositeUrl);
+          $http.get(compositeUrl).then(successfulServerCallback);
 
         },
         sampleCode: '<?php\necho "Hello World";\n?>',
@@ -67,9 +55,7 @@ angular.module('rotApp')
           var action = "evaluateCode";
           var params = {code: code};
 
-          $soap.post(url, action, params).then(function(response) {
-            console.log(response);
-          });
+          $soap.post(url, action, params).then(successfulServerCallback);
 
         },
         sampleCode: 'System.out.println("Hello World");',

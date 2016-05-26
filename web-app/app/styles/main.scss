@@ -18,6 +18,10 @@ body {
   &:focus {
     outline: 0px solid transparent;
   }
+
+  &.error {
+    color: red;
+  }
 }
 
 .CodeMirror-wrap {

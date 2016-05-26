@@ -33,11 +33,10 @@ angular.module('rotApp')
         mode: "php",
         handler: function(code) {
 
-
-
           var params = {code: code};
+          var encodedParams = encodeURIComponent(JSON.stringify(params));
           var baseUrl = "http://localhost/";
-          var appendixUrl = "?apiRequest.APIWithParams=" + JSON.stringify(params);
+          var appendixUrl = "?apiRequest.APIWithParams=" + encodedParams;
           var compositeUrl = baseUrl + appendixUrl;
 
           console.log(compositeUrl);

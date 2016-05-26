@@ -14,7 +14,7 @@ class APIEngine {
         $apiClass = new $apiName();
         return $apiClass;
     }
-    
+
     //Конструктор
     //$apiFunctionName - название API и вызываемого метода в формате apitest_helloWorld
     //$apiFunctionParams - JSON параметры метода в строковом представлении
@@ -31,7 +31,7 @@ class APIEngine {
         $retObject->$response = json_decode('{}');
         return $retObject;
     }
-    
+
     //Вызов функции по переданным параметрам в конструкторе
     function callApiFunction() {
         $resultFunctionCall = $this->createDefaultJson();//Создаем JSON  ответа
@@ -45,13 +45,14 @@ class APIEngine {
                 $response = APIConstants::$RESPONSE;
                 $jsonParams = json_decode($this->apiFunctionParams);//Декодируем параметры запроса в JSON объект
                 if ($jsonParams) {
-                    if (isset($jsonParams->responseBinary)){//Для возможности возврата не JSON, а бинарных данных таких как zip, png и др. контетнта 
+                    if (isset($jsonParams->responseBinary)){//Для возможности возврата не JSON, а бинарных данных таких как zip, png и др. контетнта
                         return $apiClass->$functionName($jsonParams);//Вызываем метод в API
                     }else{
                         $resultFunctionCall->$response = $apiClass->$functionName($jsonParams);//Вызыаем метод в API который вернет JSON обект
                     }
                 } else {
                     //Если ошибка декодирования JSON параметров запроса
+                    error_log("Error given params: " . $this->apiFunctionParams);
                     $resultFunctionCall->errno = APIConstants::$ERROR_ENGINE_PARAMS;
                     $resultFunctionCall->error = 'Error given params';
                 }

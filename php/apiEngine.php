@@ -11,7 +11,7 @@ class APIEngine {
     static function getApiEngineByName($apiName) {
         require_once 'apiBaseClass.php';
         require_once $apiName . '.php';
-        $apiClass = new $apiName();
+        $apiClass = new $apiName('ReSpot','localhost','root','root');
         return $apiClass;
     }
 

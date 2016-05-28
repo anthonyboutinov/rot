@@ -80,7 +80,20 @@ angular.module('rotApp')
           });
 
         },
-        sampleCode: 'System.out.println("Hello World");',
+        sampleCode: 'int value = 3 + 5;\n\
+ \n\
+String compositeString = "Hello" + " there, " + value + "!";\n\
+\n\
+public class Me { \n\
+  public String u; \n\
+  public Me(String u) { \n\
+   this.u = u; \n\
+ } \n\
+} \n\
+ \n\
+Me me = new Me(compositeString); \n\
+ \n\
+return me.u;',
       },
       {
         name: "C++",

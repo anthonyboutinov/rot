@@ -63,11 +63,12 @@ angular.module('rotApp')
         mode: "text/x-java",
         handler: function(code) {
 
-          var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
-          var action = "evaluateCode";
+          var baseUrl = "http://localhost:8080/RESTJavaCodeEvaluator/b/evaluatorservice/eval";
           var params = {code: code};
+          // var encodedParams = "{%22code%22:%22" + encodeURIComponent(code) + "%22}";
+          var url = baseUrl;
 
-          $soap.post(url, action, params).then(function(response) {
+          $http.post(url, params).then(function(response) {
             console.log(response);
           });
 

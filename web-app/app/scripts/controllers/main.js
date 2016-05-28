@@ -63,16 +63,37 @@ angular.module('rotApp')
         mode: "text/x-java",
         handler: function(code) {
 
-          var url = "http://localhost:8080/rot-java-webservice/services/JavaCodeEvaluator?wsdl";
-          var action = "evaluateCode";
+          var url = "http://localhost:8080/RESTJavaCodeEvaluator/b/evaluatorservice/eval";
           var params = {code: code};
 
-          $soap.post(url, action, params).then(function(response) {
-            console.log(response);
+          $http.post(url, params).then(function(response) {
+            if (response.data.result) {
+              $scope.console.output = response.data.result;
+              $scope.console.class  = "";
+            } else if (response.data.exception) {
+              $scope.console.output = response.data.exception;
+              $scope.console.class  = "error";
+            } else {
+              $scope.console.output = "undefined";
+              $scope.console.class  = "error";
+            }
           });
 
         },
-        sampleCode: 'System.out.println("Hello World");',
+        sampleCode: 'int value = 3 + 5;\n\
+ \n\
+String compositeString = "Hello" + " there, " + value + "!";\n\
+\n\
+public class Me { \n\
+  public String u; \n\
+  public Me(String u) { \n\
+   this.u = u; \n\
+ } \n\
+} \n\
+ \n\
+Me me = new Me(compositeString); \n\
+ \n\
+return me.u;',
       },
       {
         name: "C++",

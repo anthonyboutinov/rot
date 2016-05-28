@@ -24,39 +24,60 @@ angular.module('rotApp')
       class: '',
     };
 
+
+
+    var phpServerHandler = function(codeType, code) {
+
+      var params = {
+        codeType: codeType,
+        code: code.replace(/\n/g, " ")
+      };
+
+      var encodedParams = encodeURIComponent(JSON.stringify(params));
+
+      var baseUrl = "http://localhost/";
+      var appendixUrl = "?apiRequest.APIWithParams=";
+      var compositeUrl = baseUrl + appendixUrl + encodedParams;
+
+      console.log(compositeUrl);
+      $http.get(compositeUrl).then(function(response) {
+
+        console.log(response.data);
+        if (response.data.error) {
+          $scope.console.class = "error";
+          $scope.console.output = response.data.error;
+        } else if (response.data.response.retParameter === "Ошибка в SQL запросе:  ") {
+            $scope.console.class = "error";
+            $scope.console.output = response.data.response.retParameter;
+        }
+        else if (response.data.response.retParameter === null) {
+          $scope.console.output = "undefined";
+          $scope.console.class  = "error";
+        } else {
+          console.log(response.data.response.retParameter);
+          $scope.console.output = response.data.response.retParameter;
+          $scope.console.class  = "";
+        }
+      });
+
+    };
+
     $scope.langs = [
       {
         name: "PHP",
-        mode: "php",
+        mode: "text/x-php",
         handler: function(code) {
-
-          var params = {code: code};
-          var encodedParams = "{%22code%22:%22" + encodeURIComponent(code) + "%22}";
-          var baseUrl = "http://localhost/";
-          var appendixUrl = "?apiRequest.APIWithParams=" + encodedParams;
-          var compositeUrl = baseUrl + appendixUrl;
-
-          console.log(compositeUrl);
-          $http.get(compositeUrl).then(function(response) {
-            // console.log(response.data);
-            if (response.data.error) {
-              $scope.console.class = "error";
-              $scope.console.output = response.data.error;
-            } else {
-              if (response.data.response.retParameter === null) {
-                $scope.console.output = "undefined";
-                $scope.console.class  = "error";
-              } else {
-                console.log(response.data.response.retParameter);
-                $scope.console.output = response.data.response.retParameter;
-                $scope.console.class  = "";
-              }
-
-            }
-          });
-
+          phpServerHandler("PHP", code);
         },
         sampleCode: 'echo 3;',
+      },
+      {
+        name: "MySQL",
+        mode: "text/x-mysql",
+        handler: function(code) {
+          phpServerHandler("SQL", code);
+        },
+        sampleCode: 'select \'Hello World!\'\nfrom dual;',
       },
       {
         name: "Java",
@@ -94,13 +115,8 @@ public class Me { \n\
 Me me = new Me(compositeString); \n\
  \n\
 return me.u;',
-      },
-      {
-        name: "C++",
-        mode: "text/x-c++src",
-        handler: function(code) {},
-        sampleCode: '// No sample code set for C++'
-      },
+      }
+
     ];
 
     $scope.currentLang = "Java";

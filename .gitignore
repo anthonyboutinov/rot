@@ -1,3 +1,11 @@
 java-webservice-eclipse-workspace/.metadata/
 java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/target/
 *.log
+
+java-webservice-eclipse-workspace/.metadata/.log
+
+*.snap
+
+*.log
+
+*.lock

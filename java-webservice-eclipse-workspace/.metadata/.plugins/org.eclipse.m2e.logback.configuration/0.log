@@ -1026,3 +1026,27 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.beanshell
 2016-05-28 10:46:37,115 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
 2016-05-28 10:46:37,119 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2016-05-28 10:46:37,120 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:49:35,678 [Worker-80] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:49:35,681 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:49:35,682 [Worker-80] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:49:35,683 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:51:12,648 [Worker-80] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:51:12,649 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:51:12,650 [Worker-80] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:51:12,651 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:51:27,875 [Worker-77] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:51:27,875 [Worker-77] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:51:27,877 [Worker-77] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:51:27,877 [Worker-77] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:52:30,529 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:52:30,530 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:52:30,532 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:52:30,533 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:54:06,681 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:54:06,682 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:54:06,683 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:54:06,684 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources
+2016-05-28 10:57:40,038 [Worker-76] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:57:40,039 [Worker-76] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/main/resources
+2016-05-28 10:57:40,087 [Worker-76] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-05-28 10:57:40,088 [Worker-76] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/boutinov/Sites/rot/java-webservice-eclipse-workspace/RESTJavaCodeEvaluator/src/test/resources

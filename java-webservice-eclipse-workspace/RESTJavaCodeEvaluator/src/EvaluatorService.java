@@ -30,23 +30,25 @@ public class EvaluatorService {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public JSONObject eval(String message) {
-		
-		System.out.println(message);
-		
+	public String eval(String message) {
+				
 		String code = (new JSONObject(message)).getString("code");
 		JSONObject json = new JSONObject();
 		
 		Interpreter i = new Interpreter();
 		try {
 			Object result = i.eval(code);
-			json.put("result", result.toString());
+			if (result != null) {
+				json.put("result", result.toString());
+			} else {
+				json.put("result", "null");
+			}
 		} catch (EvalError e) {
 			json.put("exception", e.toString());
 			e.printStackTrace();
 		}
 		
-		return json;
+		return json.toString();
 		
 	}
 }

@@ -15,8 +15,9 @@ function APIWithParams($apiMethodParams) {
                 ob_end_clean();
                 $retJSON->retParameter = $result_of_eval;
           } else if ($apiMethodParams->codeType == 'SQL') {
-                $result_of_eval = $this->mySQLWorker->newSanitize($apiMethodParams->code);
-                $retJSON->retParameter =urldecode($this->mySQLWorker->getQueryResultWithErrorNoticing($result_of_eval));
+                $result_of_eval = $this->mySQLWorker->sanitize($apiMethodParams->code);
+
+                $retJSON->retParameter =$this->mySQLWorker->getQueryResultWithErrorNoticing($result_of_eval);
         }else {
             $retJSON->errorno =  APIConstants::$ERROR_ENGINE_PARAMS;
           }

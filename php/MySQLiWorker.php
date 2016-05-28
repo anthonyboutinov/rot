@@ -176,7 +176,7 @@ class MySQLiWorker {
          *  @retval typeof($sql)                        Возаращаемое значение. По умолчанию, функция ничего не возвращает.
          */
         public function sanitize(&$sql, $max_length = null) {
-            $this->innerSanitize($sql, false, false, $max_length);
+           return $this->innerSanitize($sql, false, false, $max_length);
         }
         
         /// Санитизация данных с оборотом в кавычки (продвинутая, новая санитизация)
@@ -191,6 +191,22 @@ class MySQLiWorker {
             return $this->innerSanitize($sql, true, $do_return, $max_length);
         }
 
+                /// Перевести результат запроса в массив
+        /**
+         *  @param mysqli_result $result        Резальтат запроса
+         *  @retval array
+         */
+        public function toArray($result) {
+            $out = array();
+            $i = 0;
+            if ($result && $result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $out[$i++] = $row;
+                }
+            }
+            return $out;
+        }
+
         /// Получить первую строку результата запроса (с уведомлением об ошибке, если возникает)
         /**
          *  
@@ -199,16 +215,14 @@ class MySQLiWorker {
          *  @param bool $allowNullValue                 (Опционально) Позволять возвращать пустую выборку. По умолчанию, false, т.е. будет выдаваться ошибка при пустой выборке
          *  @retval array                               Массив из первой строки результата запроса
          */
-        public function getQueryFirstRowResultWithErrorNoticing($sql, $variableIdentifier = null, $allowNullValue = false) {
+        public function getQueryResultWithErrorNoticing($sql, $variableIdentifier = null, $allowNullValue = false) {
             $this->num_queries_performed++;
             $result = $this->connectLink->query($sql);
             if (!$result) {
                 return 'Ошибка в SQL запросе: '.$this->connectLink->error.' '.$sql;
             }
             if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    return $row;
-                }
+                    return $this->toArray($result);
             } else {
                 if (!$allowNullValue) {
                     if ($variableIdentifier == null) {
@@ -219,21 +233,6 @@ class MySQLiWorker {
                 }
                 return null;
             }
-        }
-        
-        /// Получить результат запроса (с уведомлением об ошибке, если возникает)
-        /**
-         *  @param string $sql      SQL запрос строкой
-         *  @retval mysqli_result
-         */
-        public function getQueryResultWithErrorNoticing($sql) {
-            $this->num_queries_performed++;
-            $result = $this->connectLink->query($sql);
-            if (!$result) {
-                return 'Ошибка в SQL запросе: '.$this->connectLink->error.' '.$sql;
-            }
-//          Notification::add($sql);
-            return $result;
         }
         
         /// Преобразовать mysqli_result в ассоциативный массив, где ключи будут заданы по заданной колонке
@@ -253,21 +252,6 @@ class MySQLiWorker {
             return $out;
         }
         
-        /// Перевести результат запроса в массив
-        /**
-         *  @param mysqli_result $result        Резальтат запроса
-         *  @retval array
-         */
-        public function toArray($result) {
-            $out = array();
-            $i = 0;
-            if ($result && $result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $out[$i++] = $row;
-                }
-            }
-            return $out;
-        }
         
         /// Получить количество совершенных SQL запросов к базе данных
         public function getNumQueriesPerformed() {

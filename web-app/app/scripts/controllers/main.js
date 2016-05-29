@@ -105,7 +105,7 @@ angular.module('rotApp')
         handler: function(code) {
           phpServerHandler("SQL", code);
         },
-        sampleCode: 'select\n\n  value as `value`,\n\n    (select\n      avg(value)\n   from sample\n   ) as avg,\n\n      (select\n      max(value)\n   from sample\n   ) as max,\n\n   (select\n      min(value)\n   from sample\n   ) as min\n\nfrom sample;',
+        sampleCode: 'select\n\n  value,\n\n  (select\n    avg(value)\n   from sample\n  ) as `avg`,\n\n  (select\n    max(value)\n  from sample\n  ) as `max`,\n\n   (select\n      min(value)\n   from sample\n   ) as `min`\n\nfrom sample;',
       },
       {
         name: "Java",

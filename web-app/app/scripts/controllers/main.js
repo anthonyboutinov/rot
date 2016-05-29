@@ -112,8 +112,11 @@ angular.module('rotApp')
         mode: "text/x-java",
         handler: function(code) {
 
+          var preprocessedCode = 'String __consoleLog = "";' + code.replace('System.out.println', '__consoleLog+="<br>"+').replace('System.out.print', '__consoleLog+=') + ';return __consoleLog;';
+          console.log(preprocessedCode);
+
           var url = "http://localhost:8080/RESTJavaCodeEvaluator/b/evaluatorservice/eval";
-          var params = {code: code};
+          var params = {code: preprocessedCode};
 
           $http.post(url, params).then(function(response) {
             if (response.data.result) {
@@ -129,7 +132,7 @@ angular.module('rotApp')
           });
 
         },
-        sampleCode: 'int value = 3 + 5;\n\nString compositeString = "Hello" + " there, " + value + "!";\n\npublic class Me {\n  public String u;\n  public Me(String u) {\n   this.u = u;\n }\n} \n\nMe me = new Me(compositeString); \n\nreturn me.u;',
+        sampleCode: 'int value = 3 + 5;\n\nString compositeString = "Hello" + " there, " + value + "!";\n\nSystem.out.print(compositeString);\n\npublic class Me {\n  public String u;\n  public Me(String u) {\n   this.u = "Me.u: " + u;\n }\n} \n\nMe me = new Me(compositeString); \n\nSystem.out.println(me.u);',
       }
 
     ];

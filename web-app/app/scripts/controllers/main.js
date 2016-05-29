@@ -8,7 +8,7 @@
  * Controller of the rotApp
  */
 angular.module('rotApp')
-  .controller('MainCtrl', function ($scope, $http, $soap) {
+  .controller('MainCtrl', function ($scope, $http, $sce) {
 
     $scope.editorOptions = {
       lineWrapping : true,
@@ -20,11 +20,21 @@ angular.module('rotApp')
     };
 
     $scope.console = {
-      output: 'Здесь будут отображаться результаты работы программы',
+      output: $sce.trustAsHtml('Здесь будут отображаться результаты работы программы'),
       class: '',
     };
 
+    var setConsole = function(output) {
+      console.log(output);
+      $scope.console.output = $sce.trustAsHtml(output);
+      $scope.console.class = '';
+    }
 
+    var setConsoleError = function(output) {
+      console.log(output);
+      $scope.console.output = $sce.trustAsHtml(output);
+      $scope.console.class = 'error';
+    }
 
     var phpServerHandler = function(codeType, code) {
 
@@ -42,21 +52,39 @@ angular.module('rotApp')
       console.log(compositeUrl);
       $http.get(compositeUrl).then(function(response) {
 
+        var sqlErrorMsg = "Ошибка в SQL запросе:";
+
         console.log(response.data);
         if (response.data.error) {
-          $scope.console.class = "error";
-          $scope.console.output = response.data.error;
-        } else if (response.data.response.retParameter === "Ошибка в SQL запросе:  ") {
-            $scope.console.class = "error";
-            $scope.console.output = response.data.response.retParameter;
+          // PHP error msg
+          console.log('PHP error msg');
+          setConsoleError(response.data.error);
+        }
+        else if (Array.isArray(response.data.response.retParameter)) {
+          // SQL result
+          console.log('SQL result');
+          console.log(response.data.response.retParameter);
+          var retParameter = response.data.response.retParameter;
+          var out = '';
+          for (var i = 0; i < retParameter.length; i++) {
+            out += JSON.stringify(retParameter[i]) + '<br>';
+          }
+          setConsole(out);
+        }
+        else if (response.data.response.retParameter.substr(0, sqlErrorMsg.length) === sqlErrorMsg) {
+          // SQL error msg
+          console.log('SQL error msg');
+          setConsoleError(response.data.response.retParameter);
         }
         else if (response.data.response.retParameter === null) {
-          $scope.console.output = "undefined";
-          $scope.console.class  = "error";
-        } else {
-          console.log(response.data.response.retParameter);
-          $scope.console.output = response.data.response.retParameter;
-          $scope.console.class  = "";
+          // PHP null result
+          console.log('PHP null result');
+          setConsoleError("undefined");
+        }
+        else {
+          // PHP result
+          console.log('PHP result');
+          setConsole(response.data.response.retParameter)
         }
       });
 
@@ -77,7 +105,7 @@ angular.module('rotApp')
         handler: function(code) {
           phpServerHandler("SQL", code);
         },
-        sampleCode: 'select \'Hello World!\'\nfrom dual;',
+        sampleCode: 'select\n\n  value as `value`,\n\n    (select\n      avg(value)\n   from sample\n   ) as avg,\n\n      (select\n      max(value)\n   from sample\n   ) as max,\n\n   (select\n      min(value)\n   from sample\n   ) as min\n\nfrom sample;',
       },
       {
         name: "Java",
@@ -89,32 +117,19 @@ angular.module('rotApp')
 
           $http.post(url, params).then(function(response) {
             if (response.data.result) {
-              $scope.console.output = response.data.result;
-              $scope.console.class  = "";
+              setConsole(response.data.result);
             } else if (response.data.exception) {
-              $scope.console.output = response.data.exception;
-              $scope.console.class  = "error";
+              setConsoleError(response.data.exception);
             } else {
-              $scope.console.output = "undefined";
-              $scope.console.class  = "error";
+              setConsoleError('undefined');
             }
+          },
+          function(response) {
+            setConsoleError('Failed to load resource: Could not connect to the server.');
           });
 
         },
-        sampleCode: 'int value = 3 + 5;\n\
- \n\
-String compositeString = "Hello" + " there, " + value + "!";\n\
-\n\
-public class Me { \n\
-  public String u; \n\
-  public Me(String u) { \n\
-   this.u = u; \n\
- } \n\
-} \n\
- \n\
-Me me = new Me(compositeString); \n\
- \n\
-return me.u;',
+        sampleCode: 'int value = 3 + 5;\n\nString compositeString = "Hello" + " there, " + value + "!";\n\npublic class Me {\n  public String u;\n  public Me(String u) {\n   this.u = u;\n }\n} \n\nMe me = new Me(compositeString); \n\nreturn me.u;',
       }
 
     ];

@@ -14,17 +14,6 @@ import bsh.Interpreter;
  
 @Path("/evaluatorservice")
 public class EvaluatorService {
-//	@GET
-//	@Produces("application/json")
-//	public String get() {
-//		
-//		JSONObject json = new JSONObject();
-//		
-//		json.put("data", "Hello there!");
-//		
-//		return json.toString();
-//		
-//	}
  
 	@Path("/eval")
 	@POST
